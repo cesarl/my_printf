@@ -1,0 +1,20 @@
+#include "my.h"
+#include <stdarg.h>
+
+int	fct(int param1, ...)
+{
+  va_list	args; // liste des arguments à la manière de liste chainée
+  int		i;
+  char		j;
+
+  va_start(args, param1);
+  i = va_arg(args, int);
+  my_put_nbr(i);
+  //j = va_arg(args, char);
+  va_end(args);
+}
+
+int	main()
+{
+  fct(1,'c');
+}
