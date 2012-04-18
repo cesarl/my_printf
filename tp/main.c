@@ -21,10 +21,11 @@ int	fct(int fmt, ...)
     }
   va_end (ap);
 
-  printf("\n%d\n%s\n%s", 15, "blop", "fick");
+  //  printf("\n%d\n%s\n%s", 15, "blop", "fick");
 }
 
 int	main()
 {
-  fct(3, "ca ca", "prout", " bidule chouette");
+  //fct(3, "ca ca", "prout", " bidule chouette");
+  printf("%#o", "merde");
 }
