@@ -170,54 +170,117 @@ void	my_putallstr(char *str)
       c += 1;
     }
 }
+
+int     my_push_args(t_arg **list, t_arg *element)
+{
+  t_arg *tmp;
+
+  tmp = *list; 
+  element->next = NULL;
+  if ((*list) == NULL)
+    {
+      (*list) = element;
+      return (1);
+    }
+  while ((*list)->next != NULL)
+    {
+      (*list) = (*list)->next;
+    }
+  (*list)->next = element;
+  (*list) = tmp;
+  return (0);
+}
+
+void	print_spaces(t_arg *args)
+{
+  int	c;
+
+  c = 0;
+  if (args->width > 0)
+    {
+      while (c < args->width)
+	{
+	  my_putchar(' ');
+	  c += 1;
+	}
+    }
+}
+
+void	print_flags(t_arg *args, va_list ap)
+{
+  //-+ #0
+  if (args)
+    {
+      while (args->flags)
+	{
+	  if (args->flags->data == 2) // space
+	    print_spaces(args);
+	  args->flags = args->flags->next;
+	}
+    }
+}
+
+void	print_spec(t_arg *args, va_list ap)
+{
+  while (args)
+    {
+      //cdieEfgGosuxXpn%bS
+      if (args->specifier == 15) //%
+	my_putchar('%');
+      else if (args->specifier == 1 || args->specifier == 2 || args->specifier == 10) // d i
+	my_put_nbr(va_arg(ap, int));
+      else if (args->specifier == 8) // o
+	nbr_tobase(va_arg(ap, int), "01234567");
+      else if (args->specifier == 11) //x
+	nbr_tobase(va_arg(ap, int), "0123456789abcdef");
+      else if (args->specifier == 12) //X
+	nbr_tobase(va_arg(ap, int), "0123456789ABCDEF");
+      else if (args->specifier == 16) //B
+	nbr_tobase(va_arg(ap, int), "01");
+      else if (args->specifier == 0) //c
+	my_putchar(va_arg(ap, int));
+      else if (args->specifier == 9) //s
+	my_putstr(va_arg(ap, char *));
+      else if(args->specifier == 17) //S NE FONCTIONNE PAS !!!
+	my_putallstr(va_arg(ap, char *));
+      else if (args->specifier == 13) //p
+	{
+	  my_putstr("0x");
+	  nbr_tobase(va_arg(ap, int), "0123456789abcdef");
+	}
+      else
+	{
+	  my_putchar('%');
+	  my_putchar(args->fakespec);
+	}
+      args = args->next;
+    }
+}
+
 t_arg	*parser(char *str, va_list ap)
 {
   int	cnt;
   t_arg	*args;
+  t_arg *tmp;
 
   cnt = 0;
-  args = malloc(sizeof(*args));
+  args = NULL;
   while (str[cnt])
     {
       if (str[cnt] == '%')
 	{
-	  cnt = put_flags(cnt + 1, str, args);
-	  cnt = put_width(cnt, str, args);
-	  cnt = put_precision(cnt, str, args);
+	  tmp = malloc(sizeof(*tmp));
+	  cnt = put_flags(cnt + 1, str, tmp);
+	  cnt = put_width(cnt, str, tmp);
+	  cnt = put_precision(cnt, str, tmp);
 	  //	  cnt = put_length(cnt, str, args);
-	  cnt = put_specifier(cnt, str, args);
+	  cnt = put_specifier(cnt, str, tmp);
+	  my_push_args(&args, tmp);
 	}
       cnt += 1;
     }
-  if (args->specifier == 15) //%
-    my_putchar('%');
-  else if (args->specifier == 1 || args->specifier == 2) // d i
-    my_put_nbr(va_arg(ap, int));
-  else if (args->specifier == 8) // o
-    nbr_tobase(va_arg(ap, int), "01234567");
-  else if (args->specifier == 11) //x
-    nbr_tobase(va_arg(ap, int), "0123456789abcdef");
-  else if (args->specifier == 12) //X
-    nbr_tobase(va_arg(ap, int), "0123456789ABCDEF");
-  else if (args->specifier == 16) //B
-    nbr_tobase(va_arg(ap, int), "01");
-  else if (args->specifier == 0) //c
-    my_putchar(va_arg(ap, int));
-  else if (args->specifier == 9) //s
-    my_putstr(va_arg(ap, char *));
-  else if(args->specifier == 17) //S NE FONCTIONNE PAS !!!
-    my_putallstr(va_arg(ap, char *));
-  else if (args->specifier == 13) //p
-    {
-      my_putstr("0x");
-      nbr_tobase(va_arg(ap, int), "0123456789abcdef");
-    }
-  else
-    {
-      my_putchar('%');
-      my_putchar(args->fakespec);
-    }
-  
+  print_flags(args, ap);
+  print_spec(args, ap);
 }
 
 
@@ -238,7 +301,6 @@ int	main()
   int	ret[2];
   char	*str = "astek";
   char	stre[] = {'a', 's', 10, 'e', 'k', 0};
-  
   printf("##### Tests simple : 1 point par test reussi #####\n");
   printf(   "0) Modulo [%%] : {%%}\n");
   my_printf("=> Modulo [%%] : {%%}\n");
