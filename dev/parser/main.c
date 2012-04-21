@@ -122,29 +122,26 @@ int	put_precision(int cnt, char *str, t_arg *args)
   return (cnt);  
 }
 
-int	put_length(int cnt, char *str, t_arg *args)
-{
-
-}
-
 int	put_specifier(int cnt, char *str, t_arg *args)
 {
   int	mem;
 
-  mem = is_flags(cnt, str, "cdieEfgGosuxXpn%bS");
+  mem = is_flags(cnt, str, "cdiouxXpbSs%");
   if (mem == -1)
     args->fakespec = str[cnt];
   args->specifier = mem;
   return (cnt + 1);
 }
 
-void	nbr_tobase(int n, char *base)
+void	nbr_tobase(int n, char *base, char *supplement)
 {
   int	len;
   int	div;
 
   len = my_strlen(base);
   div = 1;
+  if (supplement)
+    my_putstr(supplement);
   while (len <= n / div)
     div *= len;
   while (div)
@@ -162,10 +159,7 @@ void	my_putallstr(char *str)
   while (str[c])
     {
       if (str[c] < 32 || str[c] >= 127)
-	{
-	  my_putstr("\\0");
-	  nbr_tobase(str[c], "01234567");
-	}
+	nbr_tobase(str[c], "01234567", "\\0");
       else
 	my_putchar(str[c]);
       c += 1;
@@ -221,33 +215,44 @@ void	print_flags(t_arg *args, va_list ap)
     }
 }
 
+void	print_nbr_arg(int nbr, va_list ap)
+{
+  if (nbr == 1 || nbr == 2 || nbr == 4) // d i
+    my_put_nbr(va_arg(ap, int));
+  else if (nbr == 3) // o
+    nbr_tobase(va_arg(ap, int), "01234567", "");
+  else if (nbr == 5) //x
+    nbr_tobase(va_arg(ap, int), "0123456789abcdef", "");
+  else if (nbr == 6) //X
+    nbr_tobase(va_arg(ap, int), "0123456789ABCDEF", "");
+  else if (nbr == 8) //B
+    nbr_tobase(va_arg(ap, int), "01", "");
+  else if (nbr == 0) //c
+    my_putchar(va_arg(ap, int));
+  else if (nbr == 7) //p
+    nbr_tobase(va_arg(ap, int), "0123456789abcdef", "0x");
+}
+
+void	print_char_arg(int nbr, va_list ap)
+{
+  if (nbr == 10) //s
+    my_putstr(va_arg(ap, char *));
+  else if(nbr == 9) //S 
+    my_putallstr(va_arg(ap, char *));
+}
+
 void	print_spec(t_arg *args, va_list ap)
 {
   while (args)
-    {
-      //cdieEfgGosuxXpn%bS
-      if (args->specifier == 15) //%
-	my_putchar('%');
-      else if (args->specifier == 1 || args->specifier == 2 || args->specifier == 10) // d i
-	my_put_nbr(va_arg(ap, int));
-      else if (args->specifier == 8) // o
-	nbr_tobase(va_arg(ap, int), "01234567");
-      else if (args->specifier == 11) //x
-	nbr_tobase(va_arg(ap, int), "0123456789abcdef");
-      else if (args->specifier == 12) //X
-	nbr_tobase(va_arg(ap, int), "0123456789ABCDEF");
-      else if (args->specifier == 16) //B
-	nbr_tobase(va_arg(ap, int), "01");
-      else if (args->specifier == 0) //c
-	my_putchar(va_arg(ap, int));
-      else if (args->specifier == 9) //s
-	my_putstr(va_arg(ap, char *));
-      else if(args->specifier == 17) //S NE FONCTIONNE PAS !!!
-	my_putallstr(va_arg(ap, char *));
-      else if (args->specifier == 13) //p
+    { 
+      if(args->specifier >= 0 && args->specifier <= 8)
+	print_nbr_arg(args->specifier, ap);
+      else if(args->specifier >= 9 && args->specifier <= 10)
+	print_char_arg(args->specifier, ap);
+      else if(args->specifier == 11)
 	{
-	  my_putstr("0x");
-	  nbr_tobase(va_arg(ap, int), "0123456789abcdef");
+	  my_putchar('%');
+	  args = args->next;
 	}
       else
 	{
