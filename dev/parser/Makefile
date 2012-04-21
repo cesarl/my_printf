@@ -1,2 +1,2 @@
 all:
-	cc -o test *.c -L. -lmy
+	cc -o test main.c -L. -lmy

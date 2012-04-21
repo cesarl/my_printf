@@ -161,10 +161,11 @@ void	my_putallstr(char *str)
   c = 0;
   while (str[c])
     {
-      if (str[c] < 32)
-	my_putchar('\\' + str[c]);
-      else if (str[c] >= 127)
-	my_putchar('\\' + str[c]);
+      if (str[c] < 32 || str[c] >= 127)
+	{
+	  my_putstr("\\0");
+	  nbr_tobase(str[c], "01234567");
+	}
       else
 	my_putchar(str[c]);
       c += 1;
