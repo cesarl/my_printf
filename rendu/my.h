@@ -26,6 +26,7 @@ typedef struct	s_arg
   int		length;
   int		specifier;
   char		fakespec;
+  char		*text;
   struct	s_arg *next;
 } t_arg;
 

@@ -11,6 +11,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "my.h"
+
 int	parser(char *str, va_list ap)
 {
   int	cnt;
@@ -30,11 +31,11 @@ int	parser(char *str, va_list ap)
 	  cnt = put_width(cnt, str, tmp);
 	  cnt = put_precision(cnt, str, tmp);
 	  cnt = put_specifier(cnt, str, tmp);
-	  my_push_args(&args, tmp);
+	  res += print_flags(tmp, ap);
+	  res += print_spec(tmp, ap);
 	}
+      my_putchar(str[cnt]);
       cnt += 1;
     }
-  res += print_flags(args, ap);
-  res += print_spec(args, ap);
   return (res);
 }
