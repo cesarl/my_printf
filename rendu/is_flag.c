@@ -1,3 +1,4 @@
+#include "my_printf.h"
 int	is_flags(int cnt, char *str, char *val)
 {
   int	c;

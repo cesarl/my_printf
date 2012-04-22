@@ -16,15 +16,20 @@ NAME	= libmy.a
 
 SRCS	= cpy_str.c \
 	  is_flag.c \
+	  my_char_isnum.c \
+	  my_getnbr.c \
 	  my_printf.c \
 	  my_push_args.c \
 	  my_push_flag.c \
 	  my_putallstr.c \
 	  my_putchar.c \
 	  my_putnbr.c \
+	  my_putstr.c \
+	  my_strlen.c \
 	  nbr_tobase.c \
 	  parser.c \
 	  print_char_arg.c \
+	  print_flags.c \
 	  print_nbr_arg.c \
 	  print_spaces.c \
 	  print_spec.c \

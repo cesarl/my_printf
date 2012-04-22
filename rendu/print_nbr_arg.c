@@ -1,3 +1,5 @@
+#include <stdarg.h>
+#include "my_printf.h"
 int    	print_nbr_arg(int nbr, va_list ap)
 {
   int	res;

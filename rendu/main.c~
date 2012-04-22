@@ -1,0 +1,8 @@
+#include <stdio.h>
+#include "my_printf.h"
+
+int	main()
+{
+  printf("%s", "coucou ca va ?");
+  my_printf("%s", "coucou ca va ?");
+}

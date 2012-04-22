@@ -1,3 +1,6 @@
+#include <stdarg.h>
+#include <stdlib.h>
+#include "my_printf.h"
 int     my_push_args(t_arg **list, t_arg *element)
 {
   t_arg *tmp;

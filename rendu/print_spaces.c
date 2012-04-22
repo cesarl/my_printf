@@ -1,3 +1,5 @@
+#include <stdarg.h>
+#include "my_printf.h"
 int	print_spaces(t_arg *args)
 {
   int	c;

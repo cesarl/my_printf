@@ -1,3 +1,4 @@
+#include "my_printf.h"
 int	my_putstr(char *s)
 {
   int	counter;

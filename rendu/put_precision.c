@@ -1,3 +1,4 @@
+#include "my_printf.h"
 int	put_precision(int cnt, char *str, t_arg *args)
 {
   int	start;

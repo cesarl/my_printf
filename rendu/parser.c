@@ -1,3 +1,6 @@
+#include <stdarg.h>
+#include <stdlib.h>
+#include "my_printf.h"
 int	parser(char *str, va_list ap)
 {
   int	cnt;

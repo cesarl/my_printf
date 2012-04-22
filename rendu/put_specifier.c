@@ -1,3 +1,4 @@
+#include "my_printf.h"
 int	put_specifier(int cnt, char *str, t_arg *args)
 {
   int	mem;

@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include "my_printf.h"
 char	*cpy_str(char *src, int s, int e)
 {
   char	*cpy;
@@ -5,6 +7,8 @@ char	*cpy_str(char *src, int s, int e)
   int	str_cnt;
 
   cpy = malloc(sizeof(char) * (e - s));
+  if (cpy == NULL)
+    return (NULL);
   cnt = 0;
   str_cnt = s;
   while (cnt <= (e - s))

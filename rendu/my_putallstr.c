@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include "my_printf.h"
 int	my_putallstr(char *str)
 {
   int	c;

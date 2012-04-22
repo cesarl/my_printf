@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include "my_printf.h"
 int	put_flags(int cnt, char *str, t_arg *args)
 {
   args->flags = NULL;

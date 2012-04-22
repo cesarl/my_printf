@@ -1,3 +1,6 @@
+#include <stdarg.h>
+#include <stdlib.h>
+#include "my_printf.h"
 int     my_push_flag(t_flag **list, int value)
 {
   t_flag *element;

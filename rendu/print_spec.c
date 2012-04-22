@@ -1,3 +1,5 @@
+#include <stdarg.h>
+#include "my_printf.h"
 int    	print_spec(t_arg *args, va_list ap)
 {
   int	res;
