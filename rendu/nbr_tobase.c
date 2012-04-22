@@ -1,4 +1,14 @@
-#include "my_printf.h"
+/*
+** nbr_tobase.c for nbr_tobase in /home/leblic_c//Documents/my_printf/rendu
+** 
+** Made by cesar leblic
+** Login   <leblic_c@epitech.net>
+** 
+** Started on  Sun Apr 22 16:43:56 2012 cesar leblic
+** Last update Sun Apr 22 16:44:09 2012 cesar leblic
+*/
+
+#include "my.h"
 int	nbr_tobase(int n, char *base, char *supplement)
 {
   int	len;

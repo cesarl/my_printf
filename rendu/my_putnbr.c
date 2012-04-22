@@ -1,4 +1,14 @@
-#include "my_printf.h"
+/*
+** my_putnbr.c for putnbr in /home/leblic_c//Documents/my_printf/rendu
+** 
+** Made by cesar leblic
+** Login   <leblic_c@epitech.net>
+** 
+** Started on  Sun Apr 22 16:42:51 2012 cesar leblic
+** Last update Sun Apr 22 16:42:56 2012 cesar leblic
+*/
+
+#include "my.h"
 int	my_putnbr(int nb)
 {
   int	div;

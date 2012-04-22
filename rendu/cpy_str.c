@@ -1,5 +1,15 @@
+/*
+** cpy_str.c for cpy_str in /home/leblic_c//Documents/my_printf/rendu
+** 
+** Made by cesar leblic
+** Login   <leblic_c@epitech.net>
+** 
+** Started on  Sun Apr 22 16:39:32 2012 cesar leblic
+** Last update Sun Apr 22 16:39:38 2012 cesar leblic
+*/
+
 #include <stdlib.h>
-#include "my_printf.h"
+#include "my.h"
 char	*cpy_str(char *src, int s, int e)
 {
   char	*cpy;

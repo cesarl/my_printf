@@ -5,9 +5,10 @@
 ** Login   <leblic_c@epitech.net>
 ** 
 ** Started on  Wed Mar 21 12:31:49 2012 cesar leblic
-** Last update Wed Mar 21 12:32:59 2012 cesar leblic
+** Last update Sun Apr 22 16:43:38 2012 cesar leblic
 */
 
+#include "my.h"
 int	my_strlen(char *str)
 {
   int	counter;

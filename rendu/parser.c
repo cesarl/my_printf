@@ -1,6 +1,16 @@
+/*
+** parser.c for parser in /home/leblic_c//Documents/my_printf/rendu
+** 
+** Made by cesar leblic
+** Login   <leblic_c@epitech.net>
+** 
+** Started on  Sun Apr 22 16:44:18 2012 cesar leblic
+** Last update Sun Apr 22 16:44:23 2012 cesar leblic
+*/
+
 #include <stdarg.h>
 #include <stdlib.h>
-#include "my_printf.h"
+#include "my.h"
 int	parser(char *str, va_list ap)
 {
   int	cnt;

@@ -1,6 +1,16 @@
+/*
+** my_push_flag.c for push_flag in /home/leblic_c//Documents/my_printf/rendu
+** 
+** Made by cesar leblic
+** Login   <leblic_c@epitech.net>
+** 
+** Started on  Sun Apr 22 16:42:02 2012 cesar leblic
+** Last update Sun Apr 22 16:42:08 2012 cesar leblic
+*/
+
 #include <stdarg.h>
 #include <stdlib.h>
-#include "my_printf.h"
+#include "my.h"
 int     my_push_flag(t_flag **list, int value)
 {
   t_flag *element;

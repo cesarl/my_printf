@@ -1,4 +1,14 @@
-#include "my_printf.h"
+/*
+** put_width.c for put_width in /home/leblic_c//Documents/my_printf/rendu
+** 
+** Made by cesar leblic
+** Login   <leblic_c@epitech.net>
+** 
+** Started on  Sun Apr 22 16:47:44 2012 cesar leblic
+** Last update Sun Apr 22 16:47:45 2012 cesar leblic
+*/
+
+#include "my.h"
 int	put_width(int cnt, char *str, t_arg *args)
 {
   int	start;
